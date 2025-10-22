@@ -35,8 +35,9 @@
 | **Jerry** | 玩家 | 使用鍵盤的**方向鍵** (Up, Down, Left, Right) 移動，盡可能存活更久。 |
 | **Tom** | AI | 自動追逐 Jerry，速度會持續加快。Tom 移動時會在畫布上留下**藍色軌跡**。 |
 
-### 1. **遊戲結束條件：** 當 Tom 和 Jerry 的距離小於 10 像素時，遊戲結束。
-### 2. **結果：** 畫面將顯示 "GAME OVER" 以及你的存活時間（精確到小數後一位）。
+ **遊戲結束條件：** 當 Tom 和 Jerry 的距離小於 10 像素時，遊戲結束。
+ **結果：** 畫面將顯示 "GAME OVER" 以及你的存活時間（精確到小數後一位）。
+
 
 ## ⚙️ 程式碼結構解析 (Code Overview)
 
@@ -57,13 +58,13 @@
 
 包含遊戲的核心邏輯，MainClass 負責整個遊戲流程的控制。
 
-    | 方法名稱 | 職責 |
-    | :--- | :--- |
-    | `__init__` | 遊戲初始化，依序執行創建畫布、登入畫面、角色生成、按鍵綁定和開始主迴圈。 |
-    | `CreatePlayGround` | 創建 `turtle.Screen()` 遊戲視窗。 |
-    | `CreateLogInWord` | 顯示 "TOM and JERRY" 開場文字，並暫停 3 秒後清空畫面。 |
-    | `Tom_Jerry_Generate` | 初始化 Tom 和 Jerry 兩個 `turtle.Turtle` 物件，隨機設置初始位置，並註冊和設置 GIF 圖片。 |
-    | `BundleDirKey` | 綁定鍵盤的方向鍵到 Jerry 的移動方法，並設置 Tom 的軌跡。 |
-    | `Jerry_Up/Down/Left/Right` | 處理 Jerry 的移動邏輯（轉向並前進 20 單位）。 |
-    | `KeepGoing` | 遊戲主迴圈。計算 Tom 追逐 Jerry 的角度，加速 Tom 的移動，並檢查兩者距離是否小於 10 像素以觸發遊戲結束。 |
-    | `GameOver_ShowSecond` | 處理遊戲結束後的畫面顯示，計算並呈現玩家的存活時間。 |
+| 方法名稱 | 職責 |
+| :--- | :--- |
+| `__init__` | 遊戲初始化，依序執行創建畫布、登入畫面、角色生成、按鍵綁定和開始主迴圈。 |
+| `CreatePlayGround` | 創建 `turtle.Screen()` 遊戲視窗。 |
+| `CreateLogInWord` | 顯示 "TOM and JERRY" 開場文字，並暫停 3 秒後清空畫面。 |
+| `Tom_Jerry_Generate` | 初始化 Tom 和 Jerry 兩個 `turtle.Turtle` 物件，隨機設置初始位置，並註冊和設置 GIF 圖片。 |
+| `BundleDirKey` | 綁定鍵盤的方向鍵到 Jerry 的移動方法，並設置 Tom 的軌跡。 |
+| `Jerry_Up/Down/Left/Right` | 處理 Jerry 的移動邏輯（轉向並前進 20 單位）。 |
+| `KeepGoing` | 遊戲主迴圈。計算 Tom 追逐 Jerry 的角度，加速 Tom 的移動，並檢查兩者距離是否小於 10 像素以觸發遊戲結束。 |
+| `GameOver_ShowSecond` | 處理遊戲結束後的畫面顯示，計算並呈現玩家的存活時間。 |
