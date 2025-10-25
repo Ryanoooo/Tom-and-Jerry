@@ -1,7 +1,19 @@
 import turtle
 import time
 import random
+import os
+import sys
 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class MainClass:
     def __init__(self):
@@ -49,24 +61,28 @@ class MainClass:
         self.writer.clear()
 
     def Tom_Jerry_Generate(self):
-        # 創建Tom 跟 Jerry兩角色，用兩個小海龜來代表他們兩
-        self.Tom = turtle.Turtle()
-        self.Jerry = turtle.Turtle()
-        # 透過引入的工具包Random來讓他們出現在畫布中的隨機的位置
+        try:
+            # 創建Tom 跟 Jerry兩角色，用兩個小海龜來代表他們兩
+            self.Tom = turtle.Turtle()
+            self.Jerry = turtle.Turtle()
+            # 透過引入的工具包Random來讓他們出現在畫布中的隨機的位置
 
-        # 先把Tom 抬起來，之後讓他出生在隨機位置
-        self.Tom.penup()
-        self.Tom.goto(random.randint(-200, 200), random.randint(-200, 200))
-        # 之後Jerry也是讓他出生在隨機位置
-        self.Jerry.penup()
-        self.Jerry.goto(random.randint(-200, 200), random.randint(-200, 200))
-        # 替換Tom 跟 Jerry 的圖片，不要原始的箭頭形狀，先到網路上抓兩張圖片代表Tom and Jerry
-        # 先向遊戲場所註冊我們的這兩張圖片
-        self.playground.register_shape('img/Tom.gif')
-        self.playground.register_shape('img/Jerry.gif')
-        self.Tom.shape('img/Tom.gif')
-        self.Jerry.shape('img/Jerry.gif')
-        self.TomSpeed = 5
+            # 先把Tom 抬起來，之後讓他出生在隨機位置
+            self.Tom.penup()
+            self.Tom.goto(random.randint(-200, 200), random.randint(-200, 200))
+            # 之後Jerry也是讓他出生在隨機位置
+            self.Jerry.penup()
+            self.Jerry.goto(random.randint(-200, 200), random.randint(-200, 200))
+            # 替換Tom 跟 Jerry 的圖片，不要原始的箭頭形狀，先到網路上抓兩張圖片代表Tom and Jerry
+            # 先向遊戲場所註冊我們的這兩張圖片
+            self.playground.register_shape(resource_path('img/Tom.gif'))
+            self.playground.register_shape(resource_path('img/Jerry.gif'))
+            self.Tom.shape(resource_path('img/Tom.gif'))
+            self.Jerry.shape(resource_path('img/Jerry.gif'))
+            self.TomSpeed = 5
+        except Exception as e:
+            print(f"Error loading images:", {e})
+            raise
 
     def BundleDirKey(self):
         self.playground.onkey(self.Jerry_Up, "Up")
@@ -135,4 +151,6 @@ class MainClass:
                 # 清空螢幕並中斷
                 self.playground.clear()
                 self.GameOver_ShowSecond()
+                self.playground.mainloop()
+
                 break
