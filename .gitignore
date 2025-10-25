@@ -1,4 +1,4 @@
 dist/
 build/
 *.spec
-__ptcache__/
+__pycache__/
